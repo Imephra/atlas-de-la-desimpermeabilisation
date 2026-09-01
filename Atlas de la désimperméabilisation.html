@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Atlas de la désimperméabilisation — Bergues</title>
+<link rel="stylesheet" href="lib/leaflet/leaflet.css"/>
+<script src="lib/leaflet/leaflet.js"></script>
+<!-- MapLibre GL : rendu vectoriel des fonds CartoDB Positron/Dark Matter (gratuit, sans clé API) -->
+<link rel="stylesheet" href="lib/maplibre-gl/maplibre-gl.css"/>
+<script src="lib/maplibre-gl/maplibre-gl.js"></script>
+<script src="lib/maplibre-gl/leaflet-maplibre-gl.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">
+    <h1>Atlas de la désimperméabilisation</h1>
+  </div>
+  <div id="header-right">
+    <div class="basemap-picker">
+      <button class="hbtn" id="basemap-btn" onclick="toggleBasemapMenu()">🗺️ <span id="basemap-label">CartoDB Clair</span> <span class="hbtn-caret">▾</span></button>
+      <div id="basemap-modal">
+        <div class="pm-sub">Fond de carte</div>
+        <div class="bm-option active" data-key="carto" onclick="changeBasemap('carto')"><span class="bm-swatch bm-carto"></span>CartoDB Clair<span class="bm-check">✓</span></div>
+        <div class="bm-option" data-key="osm" onclick="changeBasemap('osm')"><span class="bm-swatch bm-osm"></span>OpenStreetMap<span class="bm-check">✓</span></div>
+        <div class="bm-option" data-key="humanitarian" onclick="changeBasemap('humanitarian')"><span class="bm-swatch bm-humanitarian"></span>OSM Humanitarian<span class="bm-check">✓</span></div>
+        <div class="bm-option" data-key="cartodark" onclick="changeBasemap('cartodark')"><span class="bm-swatch bm-cartodark"></span>CartoDB Sombre<span class="bm-check">✓</span></div>
+        <div class="bm-option" data-key="esri" onclick="changeBasemap('esri')"><span class="bm-swatch bm-esri"></span>Esri Satellite<span class="bm-check">✓</span></div>
+      </div>
+    </div>
+    <button class="hbtn" onclick="togglePalette()">🎨 Couleurs</button>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<!-- Légende dynamique -->
+<div id="legende">
+  <h3 id="legende-title">Perméabilité</h3>
+  <div id="legende-items"></div>
+  <div class="leg-note">Cliquez sur un espace pour le détail</div>
+</div>
+
+<!-- Palette modal -->
+<div id="palette-modal">
+  <h3>Gestion des couleurs</h3>
+  <div class="pm-sub">Palette globale</div>
+  <div id="palette-list"></div>
+  <div class="pm-sep"></div>
+  <div class="pm-sub">Couleur par type d'espace</div>
+  <div id="type-color-list"></div>
+  <div class="pm-sep"></div>
+  <div style="height:1px;background:var(--beige);margin:10px 0;"></div>
+  <div style="font-size:.78rem;font-weight:600;color:var(--brun);margin-bottom:7px;">Filtrer par accès</div>
+  <div style="display:flex;gap:14px;margin-bottom:8px;">
+    <label style="display:flex;align-items:center;gap:5px;font-size:.78rem;color:var(--brun);cursor:pointer;"><input type="checkbox" id="filter-public" checked onchange="applyFilter()"/> Espaces publics</label>
+    <label style="display:flex;align-items:center;gap:5px;font-size:.78rem;color:var(--brun);cursor:pointer;"><input type="checkbox" id="filter-prive" checked onchange="applyFilter()"/> Espaces privés</label>
+  </div>
+  <div style="height:1px;background:var(--beige);margin:10px 0;"></div>
+  <button onclick="applyRandomColors()" style="background:var(--beige);border:none;border-radius:9px;padding:7px 14px;font-size:.76rem;cursor:pointer;color:var(--brun);width:100%;font-weight:600;margin-bottom:6px;">✨ Nouvelles couleurs aléatoires</button>
+  <button onclick="resetRandomColors()" style="background:var(--beige);border:none;border-radius:9px;padding:7px 14px;font-size:.76rem;cursor:pointer;color:var(--gris);width:100%;margin-bottom:6px;">↺ Réinitialiser couleurs aléatoires</button>
+  <div style="height:1px;background:var(--beige);margin:8px 0;"></div>
+  <button onclick="resetAllColors()" style="background:var(--beige);border:none;border-radius:7px;padding:6px 12px;font-size:.78rem;cursor:pointer;color:var(--brun);width:100%;">↺ Réinitialiser toutes les couleurs</button>
+</div>
+
+<!-- Panneau espace -->
+<div id="panel">
+  <div id="panel-header">
+    <div id="panel-title">—</div>
+    <button id="panel-close">✕</button>
+  </div>
+  <div id="panel-body"></div>
+</div>
+
+<!-- Fiche technique (modal centré) -->
+<div id="fiche-overlay">
+  <div id="fiche">
+    <div id="fiche-header">
+      <div id="fiche-title">—</div>
+      <button id="fiche-close">✕</button>
+    </div>
+    <div id="fiche-body"></div>
+  </div>
+</div>
+
+<!-- Info modal générique -->
+<div id="info-modal">
+  <div class="info-modal-box">
+    <button class="info-modal-close" onclick="closeInfoModal()">✕</button>
+    <div id="info-modal-content"></div>
+  </div>
+</div>
+
+<!-- Données (ordre important : les données doivent être chargées avant main.js) -->
+<script src="js/data-images-espaces.js"></script>
+<script src="js/data-images-tech.js"></script>
+<script src="js/data-geodata.js"></script>
+<script src="js/main.js"></script>
+
+<div id="footer-banner">
+  <img src="img/logos/logo-agur.png" alt="AGUR" style="height:38px;"/>
+  <div id="footer-right">
+    <span class="cofinance-label">Projet cofinancé par :</span>
+    <img src="img/logos/logo-agence-eau.png" alt="Agence de l'Eau Artois-Picardie" style="height:38px;"/>
+    <img src="img/logos/logo-cofinancement.png" alt="Cofinancement" style="height:38px;"/>
+  </div>
+</div>
+
+</body>
+</html>
