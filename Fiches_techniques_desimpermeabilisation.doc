@@ -1,0 +1,386 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<meta charset="utf-8">
+<meta name="ProgId" content="Word.Document">
+<title>Fiches techniques - Désimperméabilisation</title>
+<style>
+  body { font-family: Calibri, Arial, sans-serif; font-size: 11pt; color: #1a1a1a; }
+  h1 { font-size: 20pt; color: #1f4e2c; border-bottom: 2px solid #1f4e2c; padding-bottom: 6px; }
+  h2 { font-size: 15pt; color: #1f4e2c; margin-top: 28px; border-bottom: 1px solid #b7d5be; padding-bottom: 3px; page-break-before: always; }
+  h3 { font-size: 11.5pt; color: #2f2f2f; margin-bottom: 2px; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0 14px 0; }
+  td, th { border: 1px solid #999; padding: 4px 8px; font-size: 10pt; vertical-align: top; }
+  th { background-color: #e5efe7; text-align: left; }
+  ul { margin-top: 2px; }
+  .desc { margin: 6px 0 12px 0; text-align: justify; }
+  .intro { font-size: 10.5pt; color: #444; margin-bottom: 12px; }
+  .methodo { font-size: 9.5pt; color: #555; background:#f4f7f4; border:1px solid #cfe0d3; border-radius:6px; padding:10px 14px; margin-bottom: 20px; }
+</style>
+</head>
+<body>
+
+<h1>Fiches techniques de désimperméabilisation</h1>
+<p class="intro">Atlas interactif de la désimperméabilisation de Bergues — document généré à partir des données du site (js/main.js). Ce document reprend, pour chacune des 14 techniques référencées, la description, les indicateurs (coût, profondeur, entretien, biodiversité, infiltration), les avantages et les inconvénients.</p>
+<div class="methodo"><strong>Méthode de notation (mise à jour) :</strong> les notes ont été recalculées à partir des détails chiffrés/textuels de chaque indicateur, selon l'échelle du site : 1/5 = très faible/quasi nul, 2/5 = faible/léger, 3/5 = moyen/modéré, 4/5 = élevé/soutenu, 5/5 = très élevé. Pour l'entretien, la biodiversité et l'infiltration, la note reprend directement le qualificatif du détail (ex. « Très élevé » → 5/5). Pour le coût et la profondeur, la note reflète le positionnement de la fourchette de valeurs par rapport à l'ensemble des 14 techniques (les moins chères/profondes = 1/5, les plus chères/profondes = 5/5).</div>
+
+<h2>1. L'arbre de pluie</h2>
+<div class="desc">L'arbre de pluie est un arbre dont la fosse de plantation a été pensée et dimensionnée en surface et en dépression pour gérer une partie des eaux de ruissellement, favoriser le développement de l'arbre et la biodiversité y compris celle du sol. Il permet de créer de l'ombre, de rafraîchir l'espace environnant, et de limiter les eaux de ruissellement grâce à l'infiltration et l'évapotranspiration.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>5/5</td><td>750 à 3500 € selon la taille de l'arbre</td></tr>
+<tr><td>Profondeur</td><td>4/5</td><td>1 à 1,5 m</td></tr>
+<tr><td>Entretien</td><td>4/5</td><td>Modéré à conséquent</td></tr>
+<tr><td>Biodiversité</td><td>4/5</td><td>Élevé — habitats faunistiques, sol enrichi</td></tr>
+<tr><td>Infiltration</td><td>4/5</td><td>Bonne — infiltration par la fosse drainante</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Réduction des effets d'îlots de chaleur urbains grâce à l'absorption du CO2 et la purification de l'air</li>
+<li>Plus-value paysagère et possibilité de créer des habitats pour la biodiversité</li>
+<li>Création de zones d'ombre</li>
+<li>Absorption du bruit</li>
+<li>Longévité élevée</li>
+<li>Amélioration du cadre de vie</li>
+<li>Réduit l'effet d'îlot de chaleur urbain</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Entretien modéré à élevé les premières années</li>
+<li>Risque de gêne si mal positionné</li>
+<li>Effet d'ombrage pas suffisant les premières années</li>
+<li>Nécessité d'une protection contre les piétinements et les dépôts de déchets</li>
+</ul>
+
+<h2>2. La chaussée à structure réservoir</h2>
+<div class="desc">La chaussée à structure réservoir est une chaussée qui intègre sous sa surface une couche de matériaux à granulométrie discontinue permettant de stocker temporairement les eaux de pluie. Celles-ci s'infiltrent ensuite dans le sol, tandis que l'excédent est évacué à débit limité vers le milieu naturel ou le réseau d'assainissement. Deux configurations existent : avec un enrobé poreux permettant l'infiltration directe de l'eau, ou avec un enrobé classique où l'eau est acheminée vers la structure réservoir par une bouche d'injection et un drain.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>3/5</td><td>100 à 130 €/m²</td></tr>
+<tr><td>Profondeur</td><td>2/5</td><td>30 à 60 cm</td></tr>
+<tr><td>Entretien</td><td>2/5</td><td>Faible</td></tr>
+<tr><td>Biodiversité</td><td>1/5</td><td>Très faible — surface minérale, aucun habitat</td></tr>
+<tr><td>Infiltration</td><td>4/5</td><td>Bonne — stockage souterrain puis infiltration</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Compatible avec la circulation routière, parkings, zones piétonnes</li>
+<li>Pas de perte de place</li>
+<li>Aspect identique à une chaussée classique</li>
+<li>Infiltration directe des eaux pluviales</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Sensibilité au gel</li>
+<li>Mise en œuvre légèrement plus complexe que des solutions de surface</li>
+<li>Demande la fermeture de la route pendant les travaux</li>
+</ul>
+
+<h2>3. Les dalles alvéolaires</h2>
+<div class="desc">Les dalles alvéolaires sont des plaques en plastique ou en béton, dont les trous en forme de nid d'abeilles permettent à l'eau de pluie de s'infiltrer tout en gardant une surface stable pour marcher ou rouler. Bien que remplis de terre, de sable de graviers, ou de gazon, elles combinent solidité et perméabilité.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>5/5</td><td>40 à 600 €/m² selon leur technicité</td></tr>
+<tr><td>Profondeur</td><td>3/5</td><td>8 à 120 cm</td></tr>
+<tr><td>Entretien</td><td>2/5</td><td>Faible</td></tr>
+<tr><td>Biodiversité</td><td>2/5</td><td>Faible — intérêt si engazonnées</td></tr>
+<tr><td>Infiltration</td><td>3/5</td><td>Modérée — volumes drainés limités</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Infiltration directe des eaux pluviales</li>
+<li>Support du passage de véhicules</li>
+<li>Intégration verte (remplies de gazon) ou patrimoniale (remplies de gravier)</li>
+<li>Sensibilisation des habitants</li>
+<li>Installation simple</li>
+<li>Longue durée de vie si bien posées et entretenues</li>
+<li>Captage des polluants</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Accessibilité contraignante pour les PMR</li>
+<li>Volumes d'eau drainés assez limités</li>
+<li>Acceptabilité sociale complexe en raison de la perception de saleté associée au système</li>
+<li>Peu adapté au passage des vélos</li>
+</ul>
+
+<h2>4. Les éléments libres</h2>
+<div class="desc">Afin de mettre en place des sols souples et perméables pour des usages spécifiques tels que des aires de jeux, accès secondaires, allées de parcs et jardins, cours d'écoles, etc., il est possible de mettre en œuvre des revêtements de sols naturellement drainants tels que les copeaux de bois, les gravillons roulés, le sable, le liège, etc.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>1/5</td><td>12 à 30 €/m²</td></tr>
+<tr><td>Profondeur</td><td>2/5</td><td>30 à 40 cm</td></tr>
+<tr><td>Entretien</td><td>2/5</td><td>Faible</td></tr>
+<tr><td>Biodiversité</td><td>2/5</td><td>Faible à modéré selon le matériau choisi</td></tr>
+<tr><td>Infiltration</td><td>3/5</td><td>Modérée — volumes drainés limités</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Infiltration directe des eaux pluviales</li>
+<li>Supportent le passage de véhicules</li>
+<li>Large gamme de matériaux</li>
+<li>Sensibilisation des habitants</li>
+<li>Installation simple</li>
+<li>Longue durée de vie si bien posées et entretenues</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Risque de perte de perméabilité si pas entretenu</li>
+<li>Accessibilité contraignante pour les PMR</li>
+<li>Peut nécessiter un balayage ou désherbage pour maintenir la performance</li>
+<li>Volumes d'eau drainés assez limités</li>
+</ul>
+
+<h2>5. Les espaces d'eau permanents</h2>
+<div class="desc">Les espaces d'eau permanents constituent des bassins de stockage des eaux pluviales, naturels ou artificiels, prenant la forme de jardins d'eau, de mares, ou d'étangs. Ils recueillent les eaux par ruissellement direct ou indirect. Ces zones en eau sont parmi les milieux écologiques les plus propices au développement d'une faune et d'une flore.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>4/5</td><td>160 à 300 €/m²</td></tr>
+<tr><td>Profondeur</td><td>4/5</td><td>20 cm à 1,5 m</td></tr>
+<tr><td>Entretien</td><td>2/5</td><td>Faible</td></tr>
+<tr><td>Biodiversité</td><td>5/5</td><td>Très élevé — milieu aquatique, faune et flore riches</td></tr>
+<tr><td>Infiltration</td><td>2/5</td><td>Faible — rétention prioritaire, infiltration lente</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Parcours de l'eau à ciel ouvert qui permet une surveillance visuelle du réseau (qualité, quantité, incidents)</li>
+<li>Traite de grand volume d'eau</li>
+<li>Plus-value paysagère et possibilité de créer des habitats pour la biodiversité</li>
+<li>Sensibilisation des habitants</li>
+<li>Entretien demandant une technicité peu élevée</li>
+<li>Réduction des effets d'îlots de chaleur urbains</li>
+<li>Amélioration du cadre de vie : effet de bien-être associé à la présence de l'eau</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Nécessité d'une protection contre les dépôts de déchets</li>
+<li>Emprise foncière non négligeable</li>
+</ul>
+
+<h2>6. La fosse de Stockholm</h2>
+<div class="desc">La fosse de Stockholm se structure par des tuyaux enterrés dans lesquels l'eau de ruissellement est acheminée et qui l'amène vers les racines des arbres. Un mélange poreux laisse passer l'eau et l'air jusqu'aux racines, tout en stockant l'eau comme une réserve. Ainsi, les arbres grandissent mieux et l'eau de pluie s'infiltre naturellement au lieu de partir directement à l'égout.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>4/5</td><td>200 à 300 €/m²</td></tr>
+<tr><td>Profondeur</td><td>5/5</td><td>1,5 à 2,5 m</td></tr>
+<tr><td>Entretien</td><td>3/5</td><td>Modéré</td></tr>
+<tr><td>Biodiversité</td><td>4/5</td><td>Élevé — favorise la croissance arborée en ville</td></tr>
+<tr><td>Infiltration</td><td>5/5</td><td>Très bonne — grand volume d'absorption et infiltration</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Traite de grand volume d'eau</li>
+<li>Bon développement du système racinaire</li>
+<li>Bonne capacité de gestion des eaux de pluie par son grand volume d'absorption et d'infiltration</li>
+<li>Adapté à tout type de site (place, rue, parking, toiture)</li>
+<li>Réduction des effets d'îlots de chaleur urbains grâce à l'absorption du CO2 et la purification de l'air</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Particulièrement coûteux</li>
+<li>Installation uniquement dans des zones fortement urbanisées et qui drainent de très grandes quantités d'eau</li>
+<li>Nécessite un entretien et un arrosage fréquent</li>
+</ul>
+
+<h2>7. Le jardin de pluie</h2>
+<div class="desc">Le jardin de pluie est un bassin végétalisé de forme libre et de faible profondeur. Il stocke et infiltre temporairement les eaux pluviales et de ruissellement. Avec l'installation d'une végétation hygrophile, elle se révèle être un véritable îlot de biodiversité en zone urbaine.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>3/5</td><td>50 à 300 €/m²</td></tr>
+<tr><td>Profondeur</td><td>1/5</td><td>10 à 40 cm</td></tr>
+<tr><td>Entretien</td><td>3/5</td><td>Modéré</td></tr>
+<tr><td>Biodiversité</td><td>5/5</td><td>Très élevé — îlot de biodiversité en milieu urbain</td></tr>
+<tr><td>Infiltration</td><td>3/5</td><td>Modérée — faible volume de rétention</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Traite de grand volume d'eau</li>
+<li>Plus-value paysagère et possibilité de créer des habitats pour la biodiversité</li>
+<li>Sensibilisation des habitants</li>
+<li>Réduction des effets d'îlots de chaleur urbains</li>
+<li>Amélioration du cadre de vie : effet de bien-être associé à la présence de l'eau</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Risque de stagnation de l'eau si mal conçu</li>
+<li>Emprise foncière non négligeable</li>
+</ul>
+
+<h2>8. Les joints drainants</h2>
+<div class="desc">Les joints drainants sont des espaces perméables laissés entre les pavés. Ils sont remplis de sable, de graviers, ou végétalisés, et permettent à l'eau de pluie de s'infiltrer directement dans le sol plutôt que ruisseler. C'est une solution simple et discrète qui permet de garder l'aspect d'un pavage classique.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>2/5</td><td>35 à 80 €/m²</td></tr>
+<tr><td>Profondeur</td><td>1/5</td><td>20 à 40 cm</td></tr>
+<tr><td>Entretien</td><td>2/5</td><td>Faible</td></tr>
+<tr><td>Biodiversité</td><td>2/5</td><td>Faible — léger intérêt si végétalisés</td></tr>
+<tr><td>Infiltration</td><td>2/5</td><td>Faible à modéré — volumes d'eau drainés limités</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Infiltration directe des eaux pluviales</li>
+<li>Support du passage de véhicules</li>
+<li>Adapté à un grand nombre d'espaces différents</li>
+<li>Intégration patrimoniale</li>
+<li>Installation simple</li>
+<li>Longue durée de vie si bien posées et entretenues</li>
+<li>Captage des polluants</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Accessibilité contraignante pour les PMR</li>
+<li>Volumes d'eau drainés assez limités</li>
+<li>Acceptabilité sociale complexe en raison de la perception de saleté si végétalisé</li>
+<li>Peu adapté au passage des vélos</li>
+</ul>
+
+<h2>9. La microforêt</h2>
+<div class="desc">Une microforêt est un petit espace densément planté, rassemblant une grande diversité d'arbres et d'arbustes. Grâce à cette forte densité végétale, les sols s'enrichissent naturellement, favorisant une meilleure infiltration des eaux de pluie et un développement rapide de la biodiversité. Ce type d'aménagement contribue également à la régulation thermique urbaine en apportant fraîcheur et ombrage. De plus, l'eau absorbée par les végétaux est ensuite évapotranspirée, limitant ainsi le ruissellement vers le réseau d'assainissement et réduisant la pression sur les infrastructures hydrauliques.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>1/5</td><td>20 à 50 €/m²</td></tr>
+<tr><td>Profondeur</td><td>4/5</td><td>1 m</td></tr>
+<tr><td>Entretien</td><td>2/5</td><td>Faible</td></tr>
+<tr><td>Biodiversité</td><td>5/5</td><td>Très élevé — forte diversité végétale et faunistique</td></tr>
+<tr><td>Infiltration</td><td>4/5</td><td>Bonne — infiltration croissante à long terme</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Bonne capacité d'infiltration à long terme</li>
+<li>Plus-value paysagère et possibilité de créer des habitats pour la biodiversité</li>
+<li>Milieu autonome en 2-3 ans</li>
+<li>Croissance accélérée de la microforêt grâce à la densité</li>
+<li>Réduction des effets d'îlots de chaleur urbains</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Peut être perçu comme « désordonné » ou « mal entretenu »</li>
+<li>Demande davantage de foncier par rapport à d'autres solutions</li>
+</ul>
+
+<h2>10. Le module végétalisé</h2>
+<div class="desc">Le module végétalisé est un dispositif d'aménagement modulaire qui peut être soit composé en partie souterraine d'une réserve alimentée par les eaux pluviales de voiries et/ou de toitures, ou bien en partie supérieure d'une végétation plantée. L'eau est stockée temporairement et alimente les plantations, pour limiter les arrosages en période de sécheresse. Cette méthode permet un entretien minime et est entièrement personnalisable selon l'espace.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>5/5</td><td>300 à 900 €/m²</td></tr>
+<tr><td>Profondeur</td><td>3/5</td><td>0 à 1,2 m</td></tr>
+<tr><td>Entretien</td><td>1/5</td><td>Pas d'entretien</td></tr>
+<tr><td>Biodiversité</td><td>3/5</td><td>Modéré — végétation plantée, habitats ponctuels</td></tr>
+<tr><td>Infiltration</td><td>3/5</td><td>Modérée — stockage tampon, irrigation des plantations</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Ne demande aucun entretien</li>
+<li>Dispositif multifonctionnel (gestion de l'eau, mobilier urbain, etc.)</li>
+<li>Ne nécessite pas de travaux lourds (plug &amp; play)</li>
+<li>Adapté à grand nombre d'espaces urbains</li>
+<li>Plus-value paysagère et possibilité de créer des habitats pour la biodiversité</li>
+<li>Sensibilisation des habitants</li>
+<li>Réduction des effets d'îlots de chaleur urbains</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Plus cher qu'une technique traditionnelle</li>
+</ul>
+
+<h2>11. La noue</h2>
+<div class="desc">La noue est un espace linéaire planté présentant une légère dépression afin de recevoir les eaux pluviales, issues d'un ruissellement direct (voirie, cheminement piéton) ou indirect (toitures). Les eaux pluviales sont infiltrées sur place et contribuent au rechargement des nappes phréatiques. Si les conditions ne sont pas propices à l'infiltration, la noue stocke temporairement les eaux avant de les renvoyer à débit limité vers le milieu naturel. Grâce à l'eau, la noue est un espace propice au développement d'une végétation riche et diversifiée.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>2/5</td><td>60 à 90 €/m²</td></tr>
+<tr><td>Profondeur</td><td>3/5</td><td>30 cm à 1 m</td></tr>
+<tr><td>Entretien</td><td>2/5</td><td>Faible</td></tr>
+<tr><td>Biodiversité</td><td>4/5</td><td>Élevé — milieu végétalisé, habitat humide temporaire</td></tr>
+<tr><td>Infiltration</td><td>4/5</td><td>Bonne — grand volume, recharge des nappes</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Parcours de l'eau à ciel ouvert qui permet une surveillance visuelle du réseau</li>
+<li>Traite de grand volume d'eau</li>
+<li>Plus-value paysagère et possibilité de créer des habitats pour la biodiversité</li>
+<li>Sensibilisation des habitants</li>
+<li>Entretien demandant une technicité peu élevée</li>
+<li>Réduction des effets d'îlots de chaleur urbains</li>
+<li>Amélioration du cadre de vie</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Risque de stagnation de l'eau si mal conçu</li>
+<li>Nécessité d'une protection contre les dépôts de déchets</li>
+<li>Emprise foncière non négligeable</li>
+</ul>
+
+<h2>12. Les pavés perméables</h2>
+<div class="desc">Les pavés perméables présentent une apparence similaire à celle des pavés traditionnels, mais leur conception repose sur une structure poreuse permettant l'infiltration de l'eau. Ils constituent une solution à la fois fonctionnelle et esthétiquement adaptée à de nombreux espaces urbains.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>2/5</td><td>50 à 120 €/m²</td></tr>
+<tr><td>Profondeur</td><td>2/5</td><td>30 à 40 cm</td></tr>
+<tr><td>Entretien</td><td>2/5</td><td>Faible</td></tr>
+<tr><td>Biodiversité</td><td>1/5</td><td>Très faible — surface minérale sans végétation</td></tr>
+<tr><td>Infiltration</td><td>3/5</td><td>Modérée — volumes d'eau drainés limités</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Infiltration directe des eaux pluviales</li>
+<li>Adapté au passage des véhicules et des vélos</li>
+<li>Large gamme de matériaux</li>
+<li>Installation simple</li>
+<li>Longue durée de vie si bien posées et entretenues</li>
+<li>Entretien faible</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Colmatage possible si mal entretenu</li>
+<li>Volumes d'eau drainés assez limités</li>
+</ul>
+
+<h2>13. Le puit d'infiltration</h2>
+<div class="desc">Un puit d'infiltration est un ouvrage en béton ou en plastique, enterré dans le sol, permettant de collecter, stocker, et infiltrer les eaux pluviales. À l'aide de tuyaux, il permet de réduire le ruissellement en milieu urbain et de recharger la nappe phréatique.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>4/5</td><td>300 à 800 € par unité</td></tr>
+<tr><td>Profondeur</td><td>5/5</td><td>2 à 10 m</td></tr>
+<tr><td>Entretien</td><td>3/5</td><td>Modéré</td></tr>
+<tr><td>Biodiversité</td><td>1/5</td><td>Très faible — ouvrage enterré, aucune valeur paysagère</td></tr>
+<tr><td>Infiltration</td><td>5/5</td><td>Très bonne — recharge directe de la nappe phréatique</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Entièrement enterré et n'empiète pas sur l'espace public</li>
+<li>Traite de grand volume d'eau</li>
+<li>Adapté pour les zones densément bâties ou patrimoniales</li>
+<li>Dimensionnable selon les besoins</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Pas de valeur paysagère ni pédagogique</li>
+<li>Nécessite une protection contre les dépôts de déchets</li>
+<li>Nécessite étude du sol, perméabilité, nappe phréatique, risques de pollution</li>
+</ul>
+
+<h2>14. La tranchée d'infiltration</h2>
+<div class="desc">La tranchée d'infiltration est un ouvrage linéaire de faible profondeur rempli de matériaux perméables. L'eau y est amenée soit par des canalisations, soit par ruissellement direct. Elle assure la filtration et le stockage temporaire des eaux pluviales avant infiltration. Elle permet aussi de guider les racines vers le bas et empêche ainsi les racines de dégrader la chaussée.</div>
+<table>
+<tr><th>Indicateur</th><th>Niveau</th><th>Détail</th></tr>
+<tr><td>Coût</td><td>3/5</td><td>30 à 150 €/m²</td></tr>
+<tr><td>Profondeur</td><td>4/5</td><td>0,7 à 1 m</td></tr>
+<tr><td>Entretien</td><td>3/5</td><td>Modéré</td></tr>
+<tr><td>Biodiversité</td><td>1/5</td><td>Très faible — ouvrage minéral, sans végétation</td></tr>
+<tr><td>Infiltration</td><td>4/5</td><td>Bonne — filtration et réalimentation de la nappe</td></tr>
+</table>
+<h3>✔ Avantages</h3>
+<ul>
+<li>Faciles à mettre en œuvre</li>
+<li>Aménagement discret</li>
+<li>Faible coût à la réalisation et à l'exploitation</li>
+<li>Dépollution des eaux pluviales par filtration</li>
+<li>Réalimentation de la nappe si infiltration</li>
+</ul>
+<h3>✘ Inconvénients</h3>
+<ul>
+<li>Difficiles à mettre en œuvre lorsque la pente du projet est forte</li>
+<li>Sensibles au colmatage</li>
+</ul>
+
+</body>
+</html>

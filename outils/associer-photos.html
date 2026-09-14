@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Associer des photos aux espaces — Atlas Bergues</title>
+<style>
+:root{--brun:#3d2b1f;--beige:#f5f0e8;--blanc:#fdfbf7;--vert:#2d6a4f;--vert-clair:#52b788;--rouge:#c1440e;--gris:#8b8680;--ombre:rgba(30,20,10,.18);}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',Arial,sans-serif;background:var(--beige);color:var(--brun);}
+header{background:var(--brun);color:var(--blanc);padding:18px 24px;box-shadow:0 2px 12px var(--ombre);position:sticky;top:0;z-index:10;}
+header h1{margin:0 0 4px;font-size:1.3rem;}
+header p{margin:0;font-size:.85rem;opacity:.85;}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:14px 24px;background:var(--blanc);border-bottom:1px solid #e5ddd0;position:sticky;top:78px;z-index:9;}
+.toolbar input[type=text]{padding:7px 10px;border:1px solid #ddd;border-radius:8px;font-size:.85rem;min-width:180px;}
+.toolbar select{padding:7px 10px;border:1px solid #ddd;border-radius:8px;font-size:.85rem;}
+.btn{background:var(--vert);color:var(--blanc);border:none;border-radius:8px;padding:8px 14px;font-size:.85rem;cursor:pointer;font-weight:600;}
+.btn:hover{background:var(--vert-clair);}
+.btn.secondary{background:none;color:var(--brun);border:1px solid var(--gris);}
+.btn.secondary:hover{background:var(--beige);}
+.progress{font-size:.85rem;color:var(--brun);margin-left:auto;font-weight:600;}
+main{padding:16px 24px 60px;}
+.group-title{font-size:1.05rem;font-weight:700;margin:22px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--vert-clair);display:flex;align-items:center;gap:8px;}
+.group-count{font-size:.75rem;font-weight:500;color:var(--gris);background:var(--blanc);border-radius:20px;padding:2px 10px;}
+table{width:100%;border-collapse:collapse;background:var(--blanc);border-radius:10px;overflow:hidden;box-shadow:0 2px 10px var(--ombre);}
+thead th{background:#efe8db;text-align:left;padding:9px 12px;font-size:.72rem;text-transform:uppercase;letter-spacing:.03em;color:var(--brun);}
+tbody td{padding:8px 12px;font-size:.83rem;border-top:1px solid #f0ece2;vertical-align:middle;}
+tbody tr.has-photo{background:#f2f8f4;}
+tbody tr:hover{background:#faf7f0;}
+.fid-badge{font-family:monospace;font-weight:700;background:var(--beige);border-radius:6px;padding:2px 7px;font-size:.78rem;}
+.thumb-cell{display:flex;align-items:center;gap:10px;}
+.thumb{width:52px;height:40px;border-radius:6px;object-fit:cover;background:var(--beige);border:1px solid #e5ddd0;flex-shrink:0;}
+.thumb-placeholder{width:52px;height:40px;border-radius:6px;background:var(--beige);border:1px dashed #cfc5b3;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#cfc5b3;}
+.file-label{background:var(--beige);border:1px solid #ddd;border-radius:6px;padding:5px 10px;font-size:.76rem;cursor:pointer;white-space:nowrap;}
+.file-label:hover{background:#ece4d3;}
+.file-label input{display:none;}
+.status-ok{color:var(--vert);font-size:.75rem;font-weight:600;}
+.remove-btn{background:none;border:none;color:var(--rouge);cursor:pointer;font-size:.72rem;text-decoration:underline;padding:0;}
+footer{position:sticky;bottom:0;background:var(--blanc);border-top:1px solid #e5ddd0;padding:14px 24px;display:flex;gap:12px;align-items:center;box-shadow:0 -2px 12px var(--ombre);}
+footer .hint{font-size:.78rem;color:var(--gris);}
+.banner{background:#fff8e6;border:1px solid #f0d98c;border-radius:10px;padding:12px 16px;font-size:.82rem;margin-bottom:18px;line-height:1.5;}
+.banner code{background:#f0e6c8;padding:1px 5px;border-radius:4px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📷 Associer une photo à chaque espace</h1>
+  <p>Place publique, Parking, Aire de jeux, Terrain de sport — une photo différente par ligne (identifiée par son <code>fid</code>).</p>
+</header>
+
+<main>
+  <div class="banner">
+    <strong>Mode d'emploi :</strong> pour chaque ligne, cliquez sur « Choisir une photo » et sélectionnez le fichier correspondant sur votre ordinateur.
+    La photo est automatiquement redimensionnée/compressée, l'aperçu s'affiche immédiatement, et votre sélection est <strong>sauvegardée automatiquement dans ce navigateur</strong> (vous pouvez fermer la page et revenir plus tard sans tout reperdre).
+    Une fois toutes les photos choisies (ou aussi souvent que vous voulez), cliquez sur <strong>« Télécharger le fichier de mapping »</strong> en bas de page :
+    cela génère un fichier <code>data-images-espaces-id.js</code> tout prêt à remplacer celui du dossier <code>js/</code> de l'atlas — aucune autre manipulation de fichier n'est nécessaire.
+  </div>
+
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="Filtrer par fid, revêtement, gestionnaire…" oninput="renderRows()"/>
+    <select id="filterType" onchange="renderRows()">
+      <option value="">Tous les types</option>
+      <option value="Place publique">Place publique</option>
+      <option value="Parking">Parking</option>
+      <option value="Aire de jeux">Aire de jeux</option>
+      <option value="Terrain de sport">Terrain de sport</option>
+    </select>
+    <select id="filterPhoto" onchange="renderRows()">
+      <option value="">Toutes les lignes</option>
+      <option value="with">Avec photo</option>
+      <option value="without">Sans photo</option>
+    </select>
+    <button class="btn secondary" onclick="resetAll()">🗑️ Tout effacer</button>
+    <span class="progress" id="progress"></span>
+  </div>
+
+  <div id="tables"></div>
+</main>
+
+<footer>
+  <button class="btn" onclick="downloadMapping()">⬇️ Télécharger le fichier de mapping (data-images-espaces-id.js)</button>
+  <span class="hint">Le fichier téléchargé remplace directement <code>js/data-images-espaces-id.js</code> dans le dossier de l'atlas.</span>
+</footer>
+
+<script>
+const ROWS = [
+  {fid:16, type:'Place publique', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'331.05 m²', acces:'public'},
+  {fid:126, type:'Place publique', rev:'Béton', perm:'Imperméable', gest:'Ville de Bergues', sup:'1480.8 m²', acces:'public'},
+  {fid:854, type:'Place publique', rev:'Béton', perm:'Imperméable', gest:'Ville de Bergues', sup:'2613.6 m²', acces:'public'},
+  {fid:857, type:'Place publique', rev:'Béton', perm:'Imperméable', gest:'Ville de Bergues', sup:'256.28 m²', acces:'public'},
+  {fid:1006, type:'Place publique', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'5497.4 m²', acces:'public'},
+  {fid:1, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'5497.4 m²', acces:'public'},
+  {fid:3, type:'Parking', rev:'Béton', perm:'Imperméable', gest:'Ville de Bergues', sup:'1521.83 m²', acces:'public'},
+  {fid:4, type:'Parking', rev:'Béton', perm:'Imperméable', gest:'Ville de Bergues', sup:'1657.06 m²', acces:'public'},
+  {fid:5, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'251.94 m²', acces:'public'},
+  {fid:12, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'1451.39 m²', acces:'public'},
+  {fid:14, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'600.43 m²', acces:'public'},
+  {fid:19, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'CCHF', sup:'4167.35 m²', acces:'public'},
+  {fid:22, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'2028.7 m²', acces:'public'},
+  {fid:25, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'68.97 m²', acces:'public'},
+  {fid:84, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'627.22 m²', acces:'public'},
+  {fid:85, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'156.8 m²', acces:'public'},
+  {fid:117, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'234.56 m²', acces:'public'},
+  {fid:124, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'65.39 m²', acces:'public'},
+  {fid:125, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'302.18 m²', acces:'public'},
+  {fid:127, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'195.98 m²', acces:'public'},
+  {fid:129, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'250.9 m²', acces:'public'},
+  {fid:133, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'286.45 m²', acces:'public'},
+  {fid:152, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'424.18 m²', acces:'public'},
+  {fid:156, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'404.18 m²', acces:'public'},
+  {fid:158, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Bailleur social', sup:'305.29 m²', acces:'public'},
+  {fid:159, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Bailleur social', sup:'133.25 m²', acces:'public'},
+  {fid:160, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Bailleur social', sup:'188.09 m²', acces:'public'},
+  {fid:162, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Bailleur social', sup:'199.14 m²', acces:'public'},
+  {fid:163, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Bailleur social', sup:'267.84 m²', acces:'public'},
+  {fid:166, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Bailleur social', sup:'401.42 m²', acces:'public'},
+  {fid:167, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Bailleur social', sup:'80.82 m²', acces:'public'},
+  {fid:168, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Bailleur social', sup:'51.43 m²', acces:'public'},
+  {fid:169, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'167.18 m²', acces:'public'},
+  {fid:171, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'341.3 m²', acces:'public'},
+  {fid:175, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'58.77 m²', acces:'public'},
+  {fid:176, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'50.7 m²', acces:'public'},
+  {fid:184, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'1182.63 m²', acces:'public'},
+  {fid:185, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'491.05 m²', acces:'public'},
+  {fid:186, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'318.32 m²', acces:'public'},
+  {fid:188, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'71.75 m²', acces:'public'},
+  {fid:189, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Bailleur social', sup:'764.63 m²', acces:'public'},
+  {fid:192, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'224.42 m²', acces:'public'},
+  {fid:211, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'713.36 m²', acces:'public'},
+  {fid:237, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'594.18 m²', acces:'public'},
+  {fid:240, type:'Parking', rev:'Béton', perm:'Imperméable', gest:'Ville de Bergues', sup:'396.44 m²', acces:'public'},
+  {fid:241, type:'Parking', rev:'Béton', perm:'Imperméable', gest:'Ville de Bergues', sup:'604.2 m²', acces:'public'},
+  {fid:242, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'218.88 m²', acces:'public'},
+  {fid:254, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'462.79 m²', acces:'public'},
+  {fid:330, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'CCHF', sup:'1604.42 m²', acces:'public'},
+  {fid:337, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'37.87 m²', acces:'public'},
+  {fid:339, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'173.48 m²', acces:'public'},
+  {fid:407, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Bailleur social', sup:'165.62 m²', acces:'public'},
+  {fid:439, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'3038.91 m²', acces:'public'},
+  {fid:453, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'329.24 m²', acces:'public'},
+  {fid:470, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'282.8 m²', acces:'public'},
+  {fid:471, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'246.23 m²', acces:'public'},
+  {fid:472, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'202.17 m²', acces:'public'},
+  {fid:686, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'132.12 m²', acces:'public'},
+  {fid:833, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'17.96 m²', acces:'public'},
+  {fid:848, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'3152.75 m²', acces:'public'},
+  {fid:849, type:'Parking', rev:'Dalles alvéolaires', perm:'Perméable', gest:'Ville de Bergues', sup:'2117.13 m²', acces:'public'},
+  {fid:850, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Particulier', sup:'253.59 m²', acces:'privé'},
+  {fid:853, type:'Parking', rev:'Dalles alvéolaires', perm:'Perméable', gest:'Bailleur social', sup:'101.33 m²', acces:'public'},
+  {fid:855, type:'Parking', rev:'Béton', perm:'Imperméable', gest:'Ville de Bergues', sup:'172.61 m²', acces:'public'},
+  {fid:863, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'280.73 m²', acces:'public'},
+  {fid:871, type:'Parking', rev:'Béton', perm:'Imperméable', gest:'Ville de Bergues', sup:'209.3 m²', acces:'public'},
+  {fid:930, type:'Parking', rev:'Dalles alvéolaires', perm:'Perméable', gest:'Ville de Bergues', sup:'318.3 m²', acces:'public'},
+  {fid:931, type:'Parking', rev:'Dalles alvéolaires', perm:'Perméable', gest:'Ville de Bergues', sup:'373.22 m²', acces:'public'},
+  {fid:932, type:'Parking', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'401.85 m²', acces:'public'},
+  {fid:934, type:'Parking', rev:'Dalles alvéolaires', perm:'Perméable', gest:'CCHF', sup:'138.68 m²', acces:'public'},
+  {fid:935, type:'Parking', rev:'Dalles alvéolaires', perm:'Perméable', gest:'CCHF', sup:'312.7 m²', acces:'public'},
+  {fid:936, type:'Parking', rev:'Dalles alvéolaires', perm:'Perméable', gest:'CCHF', sup:'201.27 m²', acces:'public'},
+  {fid:937, type:'Parking', rev:'Dalles alvéolaires', perm:'Perméable', gest:'CCHF', sup:'234.76 m²', acces:'public'},
+  {fid:1009, type:'Parking', rev:'Béton', perm:'Imperméable', gest:'Ville de Bergues', sup:'839.48 m²', acces:'public'},
+  {fid:537, type:'Aire de jeux', rev:'Résine', perm:'Imperméable', gest:'Ville de Bergues', sup:'279.35 m²', acces:'public'},
+  {fid:204, type:'Terrain de sport', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'453.45 m²', acces:'public'},
+  {fid:466, type:'Terrain de sport', rev:'Résine', perm:'Imperméable', gest:'Ville de Bergues', sup:'1723.27 m²', acces:'public'},
+  {fid:506, type:'Terrain de sport', rev:'Résine', perm:'Imperméable', gest:'Ville de Bergues', sup:'1766.27 m²', acces:'public'},
+  {fid:909, type:'Terrain de sport', rev:'Bitume', perm:'Imperméable', gest:'Ville de Bergues', sup:'317.57 m²', acces:'public'},
+  {fid:928, type:'Terrain de sport', rev:'Gazon synthétique', perm:'Imperméable', gest:'Ville de Bergues', sup:'8663.39 m²', acces:'public'},
+  {fid:940, type:'Terrain de sport', rev:'Gazon synthétique', perm:'Imperméable', gest:'Particulier', sup:'154.56 m²', acces:'privé'},
+];
+// Toutes ces lignes sont du type "espaces_urbains" (couche du GeoJSON) —
+// c'est ce préfixe qui, combiné au fid, forme la clé attendue par
+// SPACE_IMAGES_BY_ID dans main.js (voir data-images-espaces-id.js).
+const LAYER = 'espaces_urbains';
+
+// IndexedDB plutôt que localStorage : localStorage plafonne autour de 5 à
+// 10 Mo au total (tous sites confondus dans certains navigateurs), ce qui
+// est vite dépassé avec quelques dizaines de photos encodées en base64
+// (une simple photo de téléphone peut peser plusieurs Mo une fois encodée).
+// IndexedDB autorise des centaines de Mo, ce qui convient largement ici —
+// d'autant que chaque photo est aussi recompressée avant stockage (voir
+// compressImage ci-dessous).
+const DB_NAME='atlas-bergues-photos', STORE='photos';
+function openDB(){
+  return new Promise((resolve,reject)=>{
+    const req=indexedDB.open(DB_NAME,1);
+    req.onupgradeneeded=()=>req.result.createObjectStore(STORE);
+    req.onsuccess=()=>resolve(req.result);
+    req.onerror=()=>reject(req.error);
+  });
+}
+async function dbGetAll(){
+  const db=await openDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(STORE,'readonly'),store=tx.objectStore(STORE);
+    const keysReq=store.getAllKeys(),valsReq=store.getAll();
+    tx.oncomplete=()=>{
+      const out={};
+      keysReq.result.forEach((k,i)=>out[k]=valsReq.result[i]);
+      resolve(out);
+    };
+    tx.onerror=()=>reject(tx.error);
+  });
+}
+async function dbPut(fid,value){
+  const db=await openDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(STORE,'readwrite');
+    tx.objectStore(STORE).put(value,String(fid));
+    tx.oncomplete=()=>resolve();
+    tx.onerror=()=>reject(tx.error);
+  });
+}
+async function dbDelete(fid){
+  const db=await openDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(STORE,'readwrite');
+    tx.objectStore(STORE).delete(String(fid));
+    tx.oncomplete=()=>resolve();
+    tx.onerror=()=>reject(tx.error);
+  });
+}
+async function dbClear(){
+  const db=await openDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(STORE,'readwrite');
+    tx.objectStore(STORE).clear();
+    tx.oncomplete=()=>resolve();
+    tx.onerror=()=>reject(tx.error);
+  });
+}
+
+let photos = {}; // cache en mémoire, tenu synchronisé avec IndexedDB — {fid: {dataUrl,name}}
+
+// Redimensionne et recompresse l'image côté navigateur avant stockage :
+// une photo de téléphone (souvent 3-5 Mo, plusieurs milliers de pixels de
+// large) n'a aucun intérêt à cette taille dans une fiche de détail — on la
+// limite à 1600 px de large et on l'exporte en JPEG qualité 0.8, ce qui la
+// fait généralement passer sous les 300-500 Ko.
+function compressImage(file,maxWidth=1600,quality=0.8){
+  return new Promise((resolve,reject)=>{
+    const img=new Image();
+    const objectUrl=URL.createObjectURL(file);
+    img.onload=()=>{
+      URL.revokeObjectURL(objectUrl);
+      const scale=Math.min(1,maxWidth/img.width);
+      const canvas=document.createElement('canvas');
+      canvas.width=Math.round(img.width*scale);
+      canvas.height=Math.round(img.height*scale);
+      const ctx=canvas.getContext('2d');
+      ctx.drawImage(img,0,0,canvas.width,canvas.height);
+      resolve(canvas.toDataURL('image/jpeg',quality));
+    };
+    img.onerror=reject;
+    img.src=objectUrl;
+  });
+}
+
+async function onFileChosen(fid,input){
+  const file=input.files&&input.files[0];
+  if(!file)return;
+  let dataUrl;
+  try{
+    dataUrl=await compressImage(file);
+  }catch(e){
+    alert("Cette image n'a pas pu être lue. Essayez un autre fichier (JPEG ou PNG).");
+    return;
+  }
+  const value={dataUrl,name:file.name};
+  try{
+    await dbPut(fid,value);
+  }catch(e){
+    alert("Impossible d'enregistrer cette photo (stockage du navigateur indisponible ou plein). Téléchargez le mapping obtenu jusqu'ici, puis réessayez.");
+    return;
+  }
+  photos[fid]=value;
+  renderRows();
+}
+async function removePhoto(fid){
+  delete photos[fid];
+  await dbDelete(fid);
+  renderRows();
+}
+async function resetAll(){
+  if(!confirm('Effacer toutes les photos choisies dans cet outil ? (les fichiers originaux sur votre ordinateur ne sont pas touchés)'))return;
+  photos={};
+  await dbClear();
+  renderRows();
+}
+
+function renderRows(){
+  const q=(document.getElementById('search').value||'').toLowerCase();
+  const ftype=document.getElementById('filterType').value;
+  const fphoto=document.getElementById('filterPhoto').value;
+  const groups={};
+  ROWS.forEach(r=>{
+    if(ftype&&r.type!==ftype)return;
+    if(fphoto==='with'&&!photos[r.fid])return;
+    if(fphoto==='without'&&photos[r.fid])return;
+    const hay=`${r.fid} ${r.type} ${r.rev} ${r.gest} ${r.acces}`.toLowerCase();
+    if(q&&!hay.includes(q))return;
+    (groups[r.type]=groups[r.type]||[]).push(r);
+  });
+  const order=['Place publique','Parking','Aire de jeux','Terrain de sport'];
+  let html='';
+  order.forEach(type=>{
+    const rows=groups[type];
+    if(!rows||!rows.length)return;
+    const withPhoto=rows.filter(r=>photos[r.fid]).length;
+    html+=`<div class="group-title">${type} <span class="group-count">${withPhoto}/${rows.length} avec photo</span></div>`;
+    html+=`<table><thead><tr><th>fid</th><th>Photo</th><th>Revêtement</th><th>Perméabilité</th><th>Superficie</th><th>Gestionnaire</th><th>Accès</th></tr></thead><tbody>`;
+    rows.forEach(r=>{
+      const ph=photos[r.fid];
+      html+=`<tr class="${ph?'has-photo':''}">`;
+      html+=`<td><span class="fid-badge">${r.fid}</span></td>`;
+      html+=`<td><div class="thumb-cell">`;
+      html+=ph?`<img class="thumb" src="${ph.dataUrl}" alt="">`:`<div class="thumb-placeholder">＋</div>`;
+      html+=`<label class="file-label">${ph?'Changer':'Choisir une photo'}<input type="file" accept="image/*" onchange="onFileChosen(${r.fid},this)"></label>`;
+      if(ph)html+=`<button class="remove-btn" onclick="removePhoto(${r.fid})">retirer</button>`;
+      html+=`</div></td>`;
+      html+=`<td>${r.rev}</td><td>${r.perm}</td><td>${r.sup}</td><td>${r.gest}</td><td>${r.acces}</td>`;
+      html+=`</tr>`;
+    });
+    html+=`</tbody></table>`;
+  });
+  document.getElementById('tables').innerHTML=html||'<p>Aucune ligne ne correspond au filtre.</p>';
+  const total=ROWS.length,done=ROWS.filter(r=>photos[r.fid]).length;
+  document.getElementById('progress').textContent=`${done} / ${total} photos renseignées`;
+}
+
+function downloadMapping(){
+  const entries=Object.keys(photos).map(fid=>`  "${LAYER}_${fid}": "${photos[fid].dataUrl}"`);
+  const content=`// Généré par outils/associer-photos.html — à placer dans js/data-images-espaces-id.js
+// Une photo par espace (identifié par son fid), prioritaire sur l'image
+// générique du type d'espace définie dans data-images-espaces.js.
+const SPACE_IMAGES_BY_ID = {
+${entries.join(',\n')}
+};
+`;
+  const blob=new Blob([content],{type:'text/javascript;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='data-images-espaces-id.js';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+(async function init(){
+  try{
+    photos=await dbGetAll();
+  }catch(e){
+    console.error('IndexedDB indisponible',e);
+  }
+  renderRows();
+})();
+</script>
+
+</body>
+</html>

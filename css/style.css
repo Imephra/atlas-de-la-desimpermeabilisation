@@ -128,6 +128,7 @@ button.hbtn:hover{background:rgba(255,255,255,.22);}
 .picto-icons{display:flex;gap:3px;align-items:center;}
 .picto-icons svg{width:17px;height:17px;flex-shrink:0;}
 .picto-detail{font-size:.68rem;color:#666;}
+.picto-note{font-size:.62rem;color:var(--gris);font-style:italic;margin-top:2px;line-height:1.3;}
 
 /* Avantages / Inconvénients */
 .av-inconv{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}
@@ -169,6 +170,7 @@ button.hbtn:hover{background:rgba(255,255,255,.22);}
 .source-link{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--beige);border-radius:10px;margin-bottom:8px;text-decoration:none;color:var(--brun);transition:background .2s;}
 .source-link:hover{background:#e8f4ec;}
 .source-link .src-icon{font-size:1.2rem;flex-shrink:0;}
+.source-link .src-icon-img{height:32px;max-width:60px;width:auto;flex-shrink:0;object-fit:contain;}
 .source-link .src-info strong{font-size:.85rem;display:block;}
 .source-link .src-info span{font-size:.75rem;color:var(--gris);}
 

@@ -1,0 +1,20 @@
+/monenv/Include/*
+/monenv/Lib/*
+/monenv/Scripts/*
+/monenv/share/*
+/monenv/Procfile
+/monenv/pyvenv.cfg
+/monenv2/*
+/monenv/.venv/*
+#secrets
+.env
+
+#IDE
+**/.idea/
+monenv/.vscode/
+
+# Python cache files
+**/__pycache__/
+
+# fichiers inutiles
+convert_img.js
